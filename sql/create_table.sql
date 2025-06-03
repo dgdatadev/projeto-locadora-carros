@@ -1,0 +1,38 @@
+-- Criando a tabela de Cliente
+CREATE TABLE Cliente(
+	CNH VARCHAR(100) NOT NULL,
+	Nome VARCHAR(100) NOT NULL,
+	Cartao INT NOT NULL,
+	Telefone VARCHAR(100) NOT NULL,
+	PRIMARY KEY(CNH)
+);
+
+-- Criando a tabela de Agência
+CREATE TABLE Agencia(
+	NumAg INT NOT NULL,
+	Rua VARCHAR(100) NOT NULL,
+	Cidade VARCHAR(100) NOT NULL,
+	Estado VARCHAR(100) NOT NULL,
+	Contato VARCHAR(100) NOT NULL,
+	PRIMARY KEY(NumAg)
+);
+
+-- Criando a tabela de Carro
+CREATE TABLE Carro(
+	Placa VARCHAR(100) NOT NULL,
+	Modelo VARCHAR(100) NOT NULL,
+	Ano INT NOT NULL,
+	NumAg INT NOT NULL,
+	PRIMARY KEY(PLACA),
+	FOREIGN KEY(NumAg) REFERENCES Agencia(NumAg)
+);
+
+-- Criando a tabela de Aluguel 
+CREATE TABLE Aluguel(
+	Data DATE NOT NULL,
+	CNH VARCHAR(100) NOT NULL,
+	Placa VARCHAR(100) NOT NULL,
+	PRIMARY KEY (CNH, Placa),
+	FOREIGN KEY(CNH) REFERENCES Cliente(CNH),
+	FOREIGN KEY(Placa) REFERENCES Carro(Placa)
+);
